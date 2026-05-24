@@ -11,8 +11,8 @@ mediaYouTubeURL = "#"
 mediaDiscordURL = "https://discord.gg/zNWUXdt"
 
 [ejs.settings]
-sourceGithubLink = "https://github.com/dscalZi/HeliosLauncher"
-supportLink = "https://github.com/dscalZi/HeliosLauncher/issues"
+sourceGithubLink = "https://github.com/joooom/csmpLauncher"
+supportLink = "https://github.com/joooom/csmpLauncher/issues"
 
 [ejs.welcome]
 welcomeHeader = "WELCOME TO CSMP"
