@@ -16,13 +16,13 @@
         #main {
             display: none;
             height: calc(100% - 22px);
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0) 100%);
             width: 100%;
             position: absolute;
             z-index: 10;
         }
         #main[overlay] {
-            filter: blur(3px) contrast(0.9) brightness(1.0);
+            filter: blur(4px) contrast(0.85) brightness(0.9);
         }
     </style>
 </head>
@@ -40,9 +40,10 @@
     <div id="loadingContainer">
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
-                <img id="loadCenterImage" src="assets/images/LoadingSeal.png">
-                <img id="loadSpinnerImage" class="rotating" src="assets/images/LoadingText.png">
+                <img id="loadCenterImage" src="assets/images/CSMP_logo.png">
+                <div id="loadCSSSpinner"></div>
             </div>
+            <div id="loadingLabel">CSMP LAUNCHER</div>
         </div>
     </div>
 </body>
