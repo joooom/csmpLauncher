@@ -1,65 +1,64 @@
-<div id="loginContainer" style="display: none;">
-    <div id="loginCancelContainer" style="display: none;">
-        <button id="loginCancelButton">
-            <div id="loginCancelIcon">X</div>
+<div id="loginContainer" class="view-container" style="display: none;">
+    <div id="loginCancelContainer" style="position: absolute; top: 30px; right: 30px;">
+        <button id="loginCancelButton" class="btn-minecraft btn-stone-mc btn-small">
             <span id="loginCancelText"><%- lang('login.loginCancelText') %></span>
         </button>
     </div>
-    <div id="loginContent">
-        <form id="loginForm">
-            <img id="loginImageSeal" src="assets/images/CSMP_logo.png"/>
-            <span id="loginSubheader"><%- lang('login.loginSubheader') %></span>
-            <div class="loginFieldContainer">
-                <svg id="profileSVG" class="loginSVG" viewBox="40 37 65.36 61.43">
-                    <g>
-                        <path d="M86.77,58.12A13.79,13.79,0,1,0,73,71.91,13.79,13.79,0,0,0,86.77,58.12M97,103.67a3.41,3.41,0,0,0,3.39-3.84,27.57,27.57,0,0,0-54.61,0,3.41,3.41,0,0,0,3.39,3.84Z"/>
-                    </g>
-                </svg>
-                <span class="loginErrorSpan" id="loginEmailError"><%- lang('login.loginEmailError') %></span>
-                <input id="loginUsername" class="loginField" type="text" placeholder="<%- lang('login.loginEmailPlaceholder') %>"/>
+    
+    <div id="loginContent" class="modal-content">
+        <form id="loginForm" style="display: flex; flex-direction: column; width: 100%; max-width: 320px; align-items: center;">
+            <img id="loginImageSeal" src="assets/images/CSMP_logo.png" style="max-width: 100px; margin-bottom: 20px;" />
+            <h3 id="loginSubheader" style="color: var(--text-dark); margin-bottom: 25px; text-transform: uppercase; font-size: 13px; letter-spacing: 2px;"><%- lang('login.loginSubheader') %></h3>
+            
+            <div class="loginFieldContainer" style="width: 100%; position: relative; margin-bottom: 15px;">
+                <span class="loginErrorSpan" id="loginEmailError" style="color: var(--mc-red); font-size: 10px; font-weight: bold; position: absolute; right: 0; top: -16px; opacity: 0; transition: var(--transition);"><%- lang('login.loginEmailError') %></span>
+                <input id="loginUsername" class="input-mc" type="text" placeholder="<%- lang('login.loginEmailPlaceholder') %>" style="width: 100%; text-align: center;"/>
             </div>
-            <div class="loginFieldContainer">
-                <svg id="lockSVG" class="loginSVG" viewBox="40 32 60.36 70.43">
-                    <g>
-                        <path d="M86.16,54a16.38,16.38,0,1,0-32,0H44V102.7H96V54Zm-25.9-3.39a9.89,9.89,0,1,1,19.77,0A9.78,9.78,0,0,1,79.39,54H60.89A9.78,9.78,0,0,1,60.26,50.59ZM70,96.2a6.5,6.5,0,0,1-6.5-6.5,6.39,6.39,0,0,1,3.1-5.4V67h6.5V84.11a6.42,6.42,0,0,1,3.39,5.6A6.5,6.5,0,0,1,70,96.2Z"/>
-                    </g>
-                </svg>
-                <span class="loginErrorSpan" id="loginPasswordError"><%- lang('login.loginPasswordError') %></span>
-                <input id="loginPassword" class="loginField" type="password" placeholder="<%- lang('login.loginPasswordPlaceholder') %>"/>
+            
+            <div class="loginFieldContainer" style="width: 100%; position: relative; margin-bottom: 15px;">
+                <span class="loginErrorSpan" id="loginPasswordError" style="color: var(--mc-red); font-size: 10px; font-weight: bold; position: absolute; right: 0; top: -16px; opacity: 0; transition: var(--transition);"><%- lang('login.loginPasswordError') %></span>
+                <input id="loginPassword" class="input-mc" type="password" placeholder="<%- lang('login.loginPasswordPlaceholder') %>" style="width: 100%; text-align: center;"/>
             </div>
-            <div id="loginOptions">
+            
+            <div id="loginOptions" style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 25px;">
                 <span class="loginSpanDim">
-                    <a href="<%- lang('login.loginForgotPasswordLink') %>"><%- lang('login.loginForgotPasswordText') %></a>
+                    <a href="<%- lang('login.loginForgotPasswordLink') %>" style="font-size: 11px; font-weight: bold;"><%- lang('login.loginForgotPasswordText') %></a>
                 </span>
-                <label id="checkmarkContainer">
-                    <input id="loginRememberOption" type="checkbox" checked>
-                    <span id="loginRememberText" class="loginSpanDim"><%- lang('login.loginRememberMeText') %></span>
-                    <span class="loginCheckmark"></span>
+                <label id="checkmarkContainer" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input id="loginRememberOption" type="checkbox" checked style="display: none;">
+                    <div style="width: 16px; height: 16px; border: 2px solid var(--text-muted); display: flex; justify-content: center; align-items: center; background: var(--bg-input);">
+                        <div id="loginRememberCheck" style="width: 8px; height: 8px; background: var(--mc-green); display: block;"></div>
+                    </div>
+                    <span id="loginRememberText" class="loginSpanDim" style="color: var(--text-muted); font-size: 11px; font-weight: bold;"><%- lang('login.loginRememberMeText') %></span>
                 </label>
             </div>
-            <button id="loginButton" disabled>
-                <div id="loginButtonContent">
+            
+            <button id="loginButton" class="btn-minecraft btn-green-mc" disabled style="width: 100%; margin-bottom: 20px;">
+                <span id="loginButtonContent">
                     <%- lang('login.loginButtonText') %>
-                    <svg id="loginSVG" viewBox="0 0 24.87 13.97">
-                        <defs>
-                            <style>.arrowLine{fill:none;stroke:#FFF;stroke-width:2px;transition: 0.25s ease;}</style>
-                        </defs>
-                        <polyline class="arrowLine" points="0.71 13.26 12.56 1.41 24.16 13.02"/>
-                    </svg>
-                    <div class="circle-loader">
-                        <div class="checkmark draw"></div>
-                    </div>
-                    <!--<div class="spinningCircle" id="loginSpinner"></div>-->
-                </div>
-            </button>
-            <div id="loginDisclaimer">
-                <span class="loginSpanDim" id="loginRegisterSpan">
-                    <a href="<%- lang('login.loginNeedAccountLink') %>"><%- lang('login.loginNeedAccountText') %></a>
                 </span>
-                <p class="loginDisclaimerText"><%- lang('login.loginPasswordDisclaimer1') %></p>
-                <p class="loginDisclaimerText"><%- lang('login.loginPasswordDisclaimer2', { appName: lang('app.title') }) %></p>
+            </button>
+            
+            <div id="loginDisclaimer" style="text-align: center; display: flex; flex-direction: column; gap: 5px;">
+                <span class="loginSpanDim" id="loginRegisterSpan">
+                    <a href="<%- lang('login.loginNeedAccountLink') %>" style="font-size: 11px; font-weight: bold;"><%- lang('login.loginNeedAccountText') %></a>
+                </span>
+                <p class="loginDisclaimerText" style="color: var(--text-muted); font-size: 9px; margin-top: 10px;"><%- lang('login.loginPasswordDisclaimer1') %></p>
+                <p class="loginDisclaimerText" style="color: var(--text-muted); font-size: 9px;"><%- lang('login.loginPasswordDisclaimer2', { appName: lang('app.title') }) %></p>
             </div>
         </form>
     </div>
+    
+    <style>
+        #checkmarkContainer input:checked ~ div > #loginRememberCheck { display: block; }
+        #checkmarkContainer input:not(:checked) ~ div > #loginRememberCheck { display: none; }
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
     <script src="./assets/js/scripts/login.js"></script>
 </div>

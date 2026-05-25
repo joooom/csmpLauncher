@@ -228,13 +228,18 @@ function createWindow() {
         width: 980,
         height: 552,
         icon: getPlatformIcon('SealCircle'),
-        frame: false,
+        titleBarStyle: 'hidden',
+        titleBarOverlay: {
+            color: '#000000',
+            symbolColor: '#ffffff',
+            height: 32
+        },
         webPreferences: {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
             nodeIntegration: true,
             contextIsolation: false
         },
-        backgroundColor: '#1b1b1b'
+        backgroundColor: '#000000'
     })
     remoteMain.enable(win.webContents)
 
