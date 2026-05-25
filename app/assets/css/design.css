@@ -1,5 +1,10 @@
 @import "../../../node_modules/github-syntax-dark/lib/github-dark.css";
 
+@font-face {
+    font-family: MinecraftTen;
+    src: url('../fonts/MinecraftTen.ttf');
+}
+
 /* ==========================================================================
    Design Tokens
    ========================================================================== */
@@ -69,7 +74,7 @@ body {
     height: calc(100vh - 32px);
     width: 100%;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 30%, #1c1e2d 0%, var(--bg-darker) 100%);
+    background: transparent;
 }
 
 /* Links */
@@ -199,16 +204,84 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, .i
    ========================================================================== */
 #landingContainer { height: 100%; width: 100%; display: flex; flex-direction: column; position: relative; }
 
-.landing-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; }
+.landing-nav { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 30px; 
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--border-block);
+}
 .landing-brand { display: flex; align-items: center; gap: 15px; cursor: pointer; }
 .landing-brand img { height: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
 
-.landing-user { display: flex; align-items: center; gap: 20px; }
-.landing-user-text { font-weight: 700; font-size: 14px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-.landing-avatar {
-    width: 50px; height: 50px; border: 3px solid var(--border-block); background-color: #111; background-size: cover;
-    box-shadow: var(--shadow-block); cursor: pointer; position: relative; transition: var(--transition);
+.landing-nav-right { display: flex; align-items: center; gap: 15px; }
+
+.landing-user { 
+    display: flex; align-items: center; gap: 15px; 
+    background: var(--bg-card);
+    padding: 6px 16px;
+    border: 2px solid var(--border-block);
+    border-bottom: 4px solid var(--border-block);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
 }
+.landing-user:hover { background: var(--bg-hover); transform: translateY(-1px); }
+.landing-user:active { border-bottom-width: 2px; transform: translateY(2px); }
+
+.landing-user-text { font-weight: 700; font-size: 14px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.landing-avatar {
+    width: 32px; height: 32px; border: 2px solid var(--border-block); background-color: #111; background-size: cover;
+    position: relative;
+}
+
+/* Profile Selector Dropdown */
+.profile-dropdown {
+    position: absolute;
+    top: 100%; right: 0;
+    margin-top: 10px;
+    background: var(--bg-card);
+    border: 3px solid var(--border-block);
+    border-bottom: 5px solid var(--border-block);
+    width: 200px;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: var(--shadow-block);
+}
+.profile-dropdown.active { display: flex; }
+.profile-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px; cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+.profile-item:hover { background: var(--bg-hover); }
+.profile-item:last-child { border-bottom: none; }
+.profile-item-img { width: 24px; height: 24px; border: 1px solid var(--border-block); background-size: cover; }
+.profile-item-name { font-size: 12px; font-weight: bold; }
+.profile-add-btn {
+    padding: 10px; text-align: center; font-size: 12px; font-weight: bold;
+    color: var(--mc-green); cursor: pointer; transition: var(--transition);
+    background: rgba(0,0,0,0.2);
+}
+.profile-add-btn:hover { background: var(--mc-green); color: white; }
+
+.landing-settings-btn { 
+    background: var(--bg-card); border: 2px solid var(--border-block); border-bottom: 4px solid var(--border-block);
+    cursor: pointer; padding: 8px; transition: var(--transition); display: flex; align-items: center; justify-content: center;
+}
+.landing-settings-btn:hover { background: var(--bg-hover); transform: translateY(-1px); }
+.landing-settings-btn:active { border-bottom-width: 2px; transform: translateY(2px); }
+.landing-settings-btn svg { width: 22px; height: 22px; fill: #fff !important; transition: var(--transition); }
+.landing-settings-btn:hover svg { fill: var(--mc-gold) !important; }
+
+.profile-dropdown-arrow {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-left: 5px;
+    transition: var(--transition);
+}
+.landing-user:hover .profile-dropdown-arrow { color: #fff; }
 .landing-avatar:hover { transform: translateY(-2px); box-shadow: var(--shadow-block-hover); }
 #avatarOverlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -226,15 +299,39 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, .i
 .landing-hero-logo { height: 120px; margin-bottom: 40px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); }
 
 #launch_content { display: flex; flex-direction: column; gap: 15px; align-items: center; }
-#launch_button { font-size: 20px; padding: 15px 50px; }
+#launch_button { 
+    font-family: MinecraftTen, var(--font-heading) !important; 
+    font-size: 28px; 
+    padding: 12px 80px 22px 80px; 
+    color: #fff !important;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.25) !important;
+}
 
 #launch_details { margin-top: 20px; width: 300px; background: var(--bg-card); border: 2px solid var(--border-block); padding: 10px; box-shadow: var(--shadow-block); }
 #launch_progress { width: 100%; height: 10px; appearance: none; background: var(--bg-darker); border: 2px solid #111; }
 #launch_progress::-webkit-progress-bar { background: var(--bg-darker); }
 #launch_progress::-webkit-progress-value { background: var(--mc-green); }
 
-.landing-footer { padding: 20px 30px; display: flex; gap: 20px; position: absolute; bottom: 0; left: 0; }
-.status-block { background: var(--bg-card); border: 2px solid var(--border-block); padding: 10px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: var(--shadow-block); font-size: 11px; font-weight: 700; }
+.landing-footer { 
+    padding: 20px 30px; 
+    display: flex; 
+    justify-content: space-between; 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+}
+.status-block { 
+    background: var(--bg-card); 
+    border: 2px solid var(--border-block); 
+    padding: 10px 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+    box-shadow: var(--shadow-block); 
+    font-size: 11px; 
+    font-weight: 700; 
+}
 .status-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
 /* ==========================================================================

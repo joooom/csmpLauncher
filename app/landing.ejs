@@ -4,14 +4,21 @@
     <header class="landing-nav">
         <div class="landing-brand">
             <img src="assets/images/CSMP_logo.png" alt="CSMP Logo" id="image_seal">
-            <span class="landing-user-text">CSMP</span>
+            <button id="server_selection_button" class="btn-minecraft btn-stone-mc btn-small" style="margin-left: 10px;">
+                <%- lang('landing.launchButtonPlaceholder') %>
+            </button>
         </div>
         
-        <div class="landing-user">
-            <span id="user_text" class="landing-user-text"><%- lang('landing.usernamePlaceholder') %></span>
-            
-            <div id="avatarContainer" class="landing-avatar">
-                <button id="avatarOverlay"><%- lang('landing.usernameEditButton') %></button>
+        <div class="landing-nav-right">
+            <div class="landing-user" id="profileDropdownTrigger">
+                <span id="user_text" class="landing-user-text"><%- lang('landing.usernamePlaceholder') %></span>
+                <div id="avatarContainer" class="landing-avatar"></div>
+                <div class="profile-dropdown-arrow">&#9662;</div>
+                
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div id="profileDropdownList"></div>
+                    <div class="profile-add-btn" id="profileDropdownAdd">+ ADD ACCOUNT</div>
+                </div>
             </div>
             
             <button class="landing-settings-btn" id="settingsMediaButton">
@@ -29,12 +36,9 @@
         </div>
         
         <div id="launch_content">
-            <button id="launch_button" class="btn-minecraft btn-gold-mc">
+            <button id="launch_button" class="btn-minecraft btn-green-mc">
                 <span id="launch_details_text" style="display: none;"></span>
                 <span class="btn-inner"><%- lang('landing.launchButton') %></span>
-            </button>
-            <button id="server_selection_button" class="btn-minecraft btn-stone-mc btn-small">
-                <%- lang('landing.launchButtonPlaceholder') %>
             </button>
         </div>
         

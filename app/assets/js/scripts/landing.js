@@ -133,13 +133,60 @@ document.getElementById('settingsMediaButton').onclick = async e => {
     switchView(getCurrentView(), VIEWS.settings)
 }
 
-// Bind avatar overlay button.
-document.getElementById('avatarOverlay').onclick = async e => {
-    await prepareSettings()
-    switchView(getCurrentView(), VIEWS.settings, 500, 500, () => {
-        settingsNavItemListener(document.getElementById('settingsNavAccount'), false)
-    })
+// Profile Dropdown logic
+const profileDropdownTrigger = document.getElementById('profileDropdownTrigger')
+const profileDropdown = document.getElementById('profileDropdown')
+const profileDropdownList = document.getElementById('profileDropdownList')
+const profileDropdownAdd = document.getElementById('profileDropdownAdd')
+
+profileDropdownTrigger.onclick = (e) => {
+    e.stopPropagation()
+    profileDropdown.classList.toggle('active')
+    
+    if (profileDropdown.classList.contains('active')) {
+        const accountsObj = ConfigManager.getAuthAccounts()
+        const accounts = Array.from(Object.keys(accountsObj), v => accountsObj[v])
+        let html = ''
+        for (let acc of accounts) {
+            html += `<div class="profile-item" uuid="${acc.uuid}">
+                <div class="profile-item-img" style="background-image: url('https://mc-heads.net/head/${acc.uuid}/24')"></div>
+                <span class="profile-item-name">${acc.displayName}</span>
+            </div>`
+        }
+        profileDropdownList.innerHTML = html
+        
+        Array.from(profileDropdownList.getElementsByClassName('profile-item')).forEach(el => {
+            el.onclick = (ev) => {
+                ev.stopPropagation()
+                const uuid = el.getAttribute('uuid')
+                const authAcc = ConfigManager.setSelectedAccount(uuid)
+                ConfigManager.save()
+                updateSelectedAccount(authAcc)
+                validateSelectedAccount()
+                profileDropdown.classList.remove('active')
+            }
+        })
+    }
 }
+
+profileDropdownAdd.onclick = (e) => {
+    e.stopPropagation()
+    profileDropdown.classList.remove('active')
+    loginOptionsCancelEnabled(true)
+    loginOptionsViewOnLoginSuccess = VIEWS.landing
+    loginOptionsViewOnLoginCancel = VIEWS.landing
+    loginOptionsViewOnCancel = VIEWS.landing
+    loginOptionsViewCancelHandler = () => {
+        switchView(VIEWS.loginOptions, VIEWS.landing)
+    }
+    switchView(getCurrentView(), VIEWS.loginOptions)
+}
+
+document.addEventListener('click', (e) => {
+    if (profileDropdownTrigger && !profileDropdownTrigger.contains(e.target)) {
+        profileDropdown.classList.remove('active')
+    }
+})
 
 // Bind selected account
 function updateSelectedAccount(authUser){
